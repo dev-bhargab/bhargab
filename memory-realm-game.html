@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Realm</title>
+    <style>
+        body {font-family: Arial, sans-serif; background-color: #f0f0f0; color: #333;}
+        #game {width: 80%; margin: 0 auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);}
+        .realm {display: none;}
+        .card {width: 100px; height: 100px; margin: 10px; display: inline-block; background: #e0e0e0; border-radius: 8px; cursor: pointer; position: relative;}
+        .flipped {background: #4caf50;}
+    </style>
+</head>
+<body>
+    <div id="game">
+        <h1>Memory Realm</h1>
+        <div id="scoreboard"></div>
+        <div id="realm" class="realm"></div>
+        <button id="nextRealm">Next Realm</button>
+    </div>
+    <script>
+        const realms = [
+            { name: "Tranquility", cards: generateCards(4) },
+            { name: "Uncertainty", cards: generateCards(6) },
+            { name: "Fragmentation", cards: generateCards(8) },
+            { name: "Manipulation", cards: generateCards(10) },
+            { name: "Reality Breach", cards: generateCards(12) },
+        ];
+
+        let currentRealmIndex = 0;
+        let score = 0;
+
+        function generateCards(num) {
+            // Generate and return card pairs based on the realm
+            let cards = [];
+            for (let i = 1; i <= num; i++) {
+                cards.push(i);
+                cards.push(i); // Pairing cards
+            }
+            return cards.sort(() => 0.5 - Math.random());
+        }
+
+        function loadRealm() {
+            const realm = realms[currentRealmIndex];
+            const realmDiv = document.getElementById('realm');
+            realmDiv.innerHTML = ''; // Clear previous cards
+            realmDiv.style.display = 'block';
+            realm.cards.forEach(card => {
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'card';
+                cardDiv.dataset.value = card;
+                cardDiv.addEventListener('click', flipCard);
+                realmDiv.appendChild(cardDiv);
+            });
+        }
+
+        function flipCard(event) {
+            const cardDiv = event.currentTarget;
+            if (cardDiv.classList.contains('flipped')) return;
+            cardDiv.classList.add('flipped');
+            cardDiv.innerHTML = cardDiv.dataset.value;
+            // Implement matching logic here
+        }
+
+        document.getElementById('nextRealm').addEventListener('click', () => {
+            currentRealmIndex++;
+            if (currentRealmIndex < realms.length) {
+                loadRealm();
+            } else {
+                alert('Game Over!');
+            }
+        });
+
+        loadRealm(); // Initial load
+    </script>
+</body>
+</html>
