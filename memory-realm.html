@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Memory Realm</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; color: #333; }
+        h1 { text-align: center; }
+        #game-container { width: 80%; margin: 0 auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Welcome to The Memory Realm</h1>
+        <p>In this game, you will navigate through different memories. Solve puzzles and collect items to unveil a twist ending!</p>
+        <button id="start-game">Start Game</button>
+        <div id="game-area"></div>
+    </div>
+
+    <script>
+        document.getElementById('start-game').addEventListener('click', function() {
+            document.getElementById('game-area').innerHTML = '<p>The game is starting...</p>'; 
+            // Add more gameplay logic here
+        });
+    </script>
+</body>
+</html>
